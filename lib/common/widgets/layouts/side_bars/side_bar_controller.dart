@@ -3,7 +3,7 @@ import 'package:yt_ecommerce_admin_panel/routes/routes.dart';
 import 'package:yt_ecommerce_admin_panel/utils/device/device_utility.dart';
 
 class SideBarController extends GetxController {
-  final activeItem = TRoutes.responsiveDesignScreen.obs;
+  final activeItem = TRoutes.login.obs;
   final hoverItem = ''.obs;
 
   void changeActiveItem(String route) {

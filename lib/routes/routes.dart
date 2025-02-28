@@ -1,8 +1,5 @@
 
 class TRoutes{
-  static const firstScreen = '/';
-  static const secondScreen = '/second-screen';
-  static const secondScreenWithUID = '/second-screen/:userId';
   static const login = '/login';
   static const forgetPassword = '/forgetPassword';
   static const resetPassword = '/resetPassword';
@@ -25,14 +22,9 @@ class TRoutes{
   static const editCustomers = '/editCustomers';
   static const order = '/order';
   static const sideMenuItems = '/sideMenuItems';
-  static const responsiveDesignScreen = '/responsiveDesignScreen';
 
 
   static List sidebarMenuItems = [
-    firstScreen,
-    responsiveDesignScreen,
-    secondScreen,
-    secondScreenWithUID,
     login,
     forgetPassword,
     resetPassword,
@@ -55,7 +47,6 @@ class TRoutes{
     editCustomers,
     order,
     sideMenuItems,
-    responsiveDesignScreen
 
   ];
   
