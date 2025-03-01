@@ -12,8 +12,8 @@ class LoginScreenDesktopTablet extends StatelessWidget {
       child: Column(
         children: [
           TLoginHeader(),
-          TLoginForm(),
-        ],
+          TLoginForm(), 
+        ], 
       ),
     );
   }

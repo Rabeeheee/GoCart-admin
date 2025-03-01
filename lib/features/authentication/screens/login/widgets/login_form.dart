@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:yt_ecommerce_admin_panel/routes/routes.dart';
 import 'package:yt_ecommerce_admin_panel/utils/constants/sizes.dart';
 import 'package:yt_ecommerce_admin_panel/utils/constants/text_strings.dart';
 
@@ -40,7 +42,7 @@ class TLoginForm extends StatelessWidget {
                   Text(TTexts.rememberMe),
                 ],
               ),
-              TextButton(onPressed: (){}, child: Text(TTexts.forgetPassword))
+              TextButton(onPressed: () => Get.toNamed(TRoutes.forgetPassword) , child: Text(TTexts.forgetPassword))
             ],
           ),
           SizedBox(height: TSizes.spaceBtwSections,),
