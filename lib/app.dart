@@ -18,7 +18,7 @@ class App extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       getPages: TAppRoute.pages,
-      initialRoute: TRoutes.login,
+      initialRoute: TRoutes.dashboard,
       unknownRoute: GetPage(
           name: '/Page not found',
           page: () => Scaffold(
