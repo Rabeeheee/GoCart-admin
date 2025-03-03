@@ -10,7 +10,7 @@ class TDialogs {
     Function()? onCancel,
     Function()? onConfirm,
   }) {
-    // Show a confirmation dialog
+    // confirmation dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {

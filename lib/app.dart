@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:yt_ecommerce_admin_panel/bindings/general_bindings.dart';
 import 'package:yt_ecommerce_admin_panel/routes/app_routes.dart';
 import 'package:yt_ecommerce_admin_panel/routes/routes.dart';
 import 'utils/constants/text_strings.dart';
@@ -11,16 +12,17 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return GetMaterialApp( 
       title: TTexts.appName,
       themeMode: ThemeMode.light,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       getPages: TAppRoute.pages,
+      initialBinding: GeneralBindings(),
       initialRoute: TRoutes.dashboard,
       unknownRoute: GetPage(
-          name: '/Page not found',
+          name: '/Page not found', 
           page: () => Scaffold(
                 body: Center(
                   child: Text('Page not found'),
