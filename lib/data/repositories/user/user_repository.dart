@@ -8,38 +8,41 @@ import 'package:yt_ecommerce_admin_panel/utils/exceptions/firebase_auth_exceptio
 import 'package:yt_ecommerce_admin_panel/utils/exceptions/format_exceptions.dart';
 import 'package:yt_ecommerce_admin_panel/utils/exceptions/platform_exceptions.dart';
 
-class UserRepository extends GetxController{
+class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
 
   final _db = FirebaseFirestore.instance;
 
   Future<void> createUser(UserModel user) async {
-  try{
-    await _db.collection('Users').doc(user.id).set(user.toJson());
-  }on FirebaseAuthException catch (e){
-    throw TFirebaseAuthException(e.code).message;
-  }on FormatException catch (_){
-    throw TFormatException();
-  }on PlatformException catch (e) {
-    throw TPlatformException(e.code).message;
-  }catch (e) {
-    throw 'Something went wrong. Please try again';
+    try {
+      await _db.collection('Users').doc(user.id).set(user.toJson());
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FormatException catch (_) {
+      throw TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
   }
- }
+
   Future<UserModel> fetchAdminDetails() async {
-  try{
-    final docSnapshot = await _db.collection('Users').doc(AuthenticationRepository.instance.authUser!.uid).get();
+    try {
+      final docSnapshot = await _db
+          .collection('Users')
+          .doc(AuthenticationRepository.instance.authUser!.uid)
+          .get();
 
-          return UserModel.fromSnapshot(docSnapshot);
-
-  }on FirebaseAuthException catch (e){
-    throw TFirebaseAuthException(e.code).message;
-  }on FormatException catch (_){
-    throw TFormatException();
-  }on PlatformException catch (e) {
-    throw TPlatformException(e.code).message;
-  }catch (e) {
-    throw 'Something went wrong : $e';
+      return UserModel.fromSnapshot(docSnapshot);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FormatException catch (_) {
+      throw TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong : $e';
+    }
   }
- }
 }

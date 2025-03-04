@@ -3,7 +3,7 @@ import 'package:yt_ecommerce_admin_panel/routes/routes.dart';
 import 'package:yt_ecommerce_admin_panel/utils/device/device_utility.dart';
 
 class SideBarController extends GetxController {
-  final activeItem = TRoutes.login.obs;
+  final activeItem = TRoutes.dashboard.obs;
   final hoverItem = ''.obs;
 
   void changeActiveItem(String route) {
@@ -16,18 +16,21 @@ class SideBarController extends GetxController {
     }
   }
 
+  
+
   bool isActive(String route) => activeItem.value == route;
   bool isHovering(String route) => hoverItem.value == route;
 
-  void menuOnTap(String route) {
-    if (!isActive(route)) {
-      changeActiveItem(route);
+ void menuOnTap(String route) {
+  if (!isActive(route)) {
+    changeActiveItem(route);
 
-      if (TDeviceUtils.isMobileScreen(Get.context!)) {
-        Get.back();
-      }
-
-      Get.toNamed(route);
+    if (TDeviceUtils.isMobileScreen(Get.context!)) {
+      Get.back();
     }
+
+    Get.offAllNamed(route);
   }
+}
+
 }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:yt_ecommerce_admin_panel/common/widgets/layouts/side_bars/side_bar_controller.dart';
 import 'package:yt_ecommerce_admin_panel/routes/routes.dart';
 import 'package:yt_ecommerce_admin_panel/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:yt_ecommerce_admin_panel/utils/exceptions/firebase_exceptions.dart';
@@ -23,15 +24,22 @@ class AuthenticationRepository extends GetxController{
   }
 
 
-  void screenRedirect() async {
-    final user = _auth.currentUser;
+ void screenRedirect() async {
+  final user = _auth.currentUser;
+  final sidebarController = Get.find<SideBarController>(); // Use Get.find() to avoid creating a new instance
 
-    if(user != null){
-      Get.offAllNamed(TRoutes.dashboard);
-    }else{
-      Get.offAllNamed(TRoutes.login);
-    }
+  if (user != null) {
+    sidebarController.changeActiveItem(TRoutes.dashboard); // Ensure active item updates
+    await Future.delayed(Duration.zero); // Small delay to ensure state updates
+    Get.offAllNamed(TRoutes.dashboard);
+  } else {
+    // sidebarController.changeActiveItem(TRoutes.login);
+    // await Future.delayed(Duration.zero);
+    Get.offAllNamed(TRoutes.login);
   }
+}
+
+
 
  
  Future<UserCredential> loginWithEmailAndPassword(String email, String password) async {

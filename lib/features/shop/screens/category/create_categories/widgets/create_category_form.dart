@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DashboardTabletScreen extends StatelessWidget {
-  const DashboardTabletScreen({super.key});
+class CreateCategoryForm extends StatelessWidget {
+  const CreateCategoryForm({super.key});
 
   @override
   Widget build(BuildContext context) {
