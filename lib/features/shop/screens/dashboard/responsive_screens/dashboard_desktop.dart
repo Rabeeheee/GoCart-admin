@@ -94,26 +94,31 @@ class DashboardDesktopScreen extends StatelessWidget {
                                 height: TSizes.spaceBtwSections,
                               ),
                               Obx(
-                                ()=> SizedBox(
+                                () => SizedBox(
                                   height: 400,
                                   child: BarChart(
                                     BarChartData(
                                       titlesData: buildFlTitleData(),
                                       borderData: FlBorderData(
-                                          show: true,
-                                          border: Border(
-                                              top: BorderSide.none,
-                                              right: BorderSide.none)),
+                                        show: true,
+                                        border: Border(
+                                          top: BorderSide.none,
+                                          right: BorderSide.none,
+                                        ),
+                                      ),
                                       gridData: FlGridData(
                                         show: true,
                                         drawHorizontalLine: true,
                                         drawVerticalLine: true,
                                         horizontalInterval: 200,
                                       ),
-                                      barGroups: controller.weeklySales
-                                          .asMap()
-                                          .entries
-                                          .map((entry) => BarChartGroupData(
+                                      barGroups: controller
+                                              .weeklySales.isNotEmpty
+                                          ? controller.weeklySales
+                                              .asMap()
+                                              .entries
+                                              .map(
+                                                (entry) => BarChartGroupData(
                                                   x: entry.key,
                                                   barRods: [
                                                     BarChartRodData(
@@ -124,13 +129,24 @@ class DashboardDesktopScreen extends StatelessWidget {
                                                           BorderRadius.circular(
                                                               TSizes.sm),
                                                     )
-                                                  ]))
-                                          .toList(),
+                                                  ],
+                                                ),
+                                              )
+                                              .toList()
+                                          : [],
                                       groupsSpace: TSizes.spaceBtwItems,
                                       barTouchData: BarTouchData(
-                                        touchTooltipData: BarTouchTooltipData(getTooltipColor: (_) =>TColors.secondary),
-                                        touchCallback: TDeviceUtils.isDesktopScreen(context) ? (barTouchEvent, barTouchResponse) {} : null,
-                                      )
+                                        touchTooltipData: BarTouchTooltipData(
+                                          getTooltipColor: (_) =>
+                                              TColors.secondary,
+                                        ),
+                                        touchCallback:
+                                            TDeviceUtils.isDesktopScreen(
+                                                    context)
+                                                ? (barTouchEvent,
+                                                    barTouchResponse) {}
+                                                : null,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -160,26 +176,30 @@ class DashboardDesktopScreen extends StatelessWidget {
     );
   }
 
- FlTitlesData  buildFlTitleData() {
-  return FlTitlesData(
-    show: true,
-    bottomTitles: AxisTitles(
-      sideTitles: SideTitles(
-        showTitles: true,
-        getTitlesWidget: (value, meta){
-          final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  FlTitlesData buildFlTitleData() {
+    return FlTitlesData(
+      show: true,
+      bottomTitles: AxisTitles(
+          sideTitles: SideTitles(
+              showTitles: true,
+              getTitlesWidget: (value, meta) {
+                final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-          final index = value.toInt() % days.length;
+                final index = value.toInt() % days.length;
 
-          final day = days[index];
+                final day = days[index];
 
-          return SideTitleWidget(child: Text(day), axisSide: AxisSide.bottom, space: 0, );
-        }
-      )
-    ),
-    leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, interval: 200, reservedSize: 50)),
-    rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-    topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-  );
- }
+                return SideTitleWidget(
+                  child: Text(day),
+                  axisSide: AxisSide.bottom,
+                  space: 0,
+                );
+              })),
+      leftTitles: AxisTitles(
+          sideTitles:
+              SideTitles(showTitles: true, interval: 200, reservedSize: 50)),
+      rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+    );
+  }
 }

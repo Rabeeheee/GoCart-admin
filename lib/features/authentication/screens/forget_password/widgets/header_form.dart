@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:yt_ecommerce_admin_panel/routes/routes.dart';
+import 'package:yt_ecommerce_admin_panel/features/authentication/controller/forget_password_controller.dart';
 import 'package:yt_ecommerce_admin_panel/utils/constants/sizes.dart';
 import 'package:yt_ecommerce_admin_panel/utils/constants/text_strings.dart';
+import 'package:yt_ecommerce_admin_panel/utils/validators/validation.dart';
 
 class HeaderAndForm extends StatelessWidget {
   const HeaderAndForm({
@@ -12,7 +13,9 @@ class HeaderAndForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+        final controller = Get.put(ForgetPasswordController());
+
+    return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ///header
@@ -23,13 +26,19 @@ class HeaderAndForm extends StatelessWidget {
         Text(TTexts.forgetPasswordSubTitle, style: Theme.of(context).textTheme.labelMedium,),
         SizedBox(height: TSizes.spaceBtwSections,),
         Form(
-          child: TextFormField(
-            decoration: InputDecoration(labelText: TTexts.email, prefixIcon: Icon(Iconsax.direct_right)),
-        )),
+           key: controller.ForgetPasswordFormkey,
+              child: TextFormField(
+                controller: controller.email,
+                validator: TValidator.validateEmail,
+                decoration: InputDecoration(
+                  labelText: TTexts.email,
+                  prefixIcon: Icon(Iconsax.direct_right),
+                ),
+              ),),
         SizedBox(height: TSizes.spaceBtwSections,),
         SizedBox(
           width: double.infinity,
-          child: ElevatedButton(onPressed: () => Get.toNamed(TRoutes.resetPassword, parameters:{'email' : 'rabeeh@gmail.com'}), child: Text(TTexts.submit)),
+          child: ElevatedButton(onPressed: () => controller.sendPasswordResetEmail(), child: Text(TTexts.submit)),
         ),
         SizedBox(height: TSizes.spaceBtwSections*2,)
     

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yt_ecommerce_admin_panel/features/authentication/controller/forget_password_controller.dart';
 import 'package:yt_ecommerce_admin_panel/routes/routes.dart';
 import 'package:yt_ecommerce_admin_panel/utils/constants/image_strings.dart';
 import 'package:yt_ecommerce_admin_panel/utils/constants/sizes.dart';
@@ -8,13 +9,15 @@ import 'package:yt_ecommerce_admin_panel/utils/constants/text_strings.dart';
 
 class ResetpasswordWidget extends StatelessWidget {
   const ResetpasswordWidget({
-    super.key,
+    super.key, required this.email,
   });
+
+  final String email;
 
 
   @override
   Widget build(BuildContext context) {
-        final email = Get.parameters['email'] ?? '';
+    
 
     return Column(
       children: [
@@ -43,13 +46,13 @@ class ResetpasswordWidget extends StatelessWidget {
     
         SizedBox(
           width: double.infinity,
-          child: ElevatedButton(onPressed: ()=> Get.offAll(TRoutes.login), child: Text(TTexts.done)),
+          child: ElevatedButton(onPressed: ()=> Get.offAllNamed(TRoutes.login), child: Text(TTexts.done)),
     
           
         ),
         SizedBox(height: TSizes.spaceBtwItems,),
         SizedBox(width: double.infinity,
-        child: TextButton(onPressed: (){}, child: Text(TTexts.resendEmail)),
+        child: TextButton(onPressed: ()=> ForgetPasswordController.instance.resendPasswordResetEmail(email), child: Text(TTexts.resendEmail)),
         )
     
       ],

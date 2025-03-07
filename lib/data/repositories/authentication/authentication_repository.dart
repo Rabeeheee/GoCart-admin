@@ -26,15 +26,13 @@ class AuthenticationRepository extends GetxController{
 
  void screenRedirect() async {
   final user = _auth.currentUser;
-  final sidebarController = Get.find<SideBarController>(); // Use Get.find() to avoid creating a new instance
+  final sidebarController = Get.put(SideBarController());
 
   if (user != null) {
-    sidebarController.changeActiveItem(TRoutes.dashboard); // Ensure active item updates
-    await Future.delayed(Duration.zero); // Small delay to ensure state updates
+    sidebarController.changeActiveItem(TRoutes.dashboard); 
     Get.offAllNamed(TRoutes.dashboard);
   } else {
-    // sidebarController.changeActiveItem(TRoutes.login);
-    // await Future.delayed(Duration.zero);
+    sidebarController.changeActiveItem(TRoutes.login); 
     Get.offAllNamed(TRoutes.login);
   }
 }
@@ -91,6 +89,22 @@ class AuthenticationRepository extends GetxController{
     throw 'Something went wrong. Please try again';
   }
  }
+
+ Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again.';
+    }
+  }
 
 
 }

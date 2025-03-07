@@ -1,10 +1,15 @@
 import 'package:get/get.dart';
-import 'package:yt_ecommerce_admin_panel/routes/routes.dart';
 import 'package:yt_ecommerce_admin_panel/utils/device/device_utility.dart';
 
 class SideBarController extends GetxController {
-  final activeItem = TRoutes.dashboard.obs;
+  final activeItem = ''.obs;
   final hoverItem = ''.obs;
+
+   @override
+  void onInit() {
+    super.onInit();
+    activeItem.value = Get.currentRoute;
+  }
 
   void changeActiveItem(String route) {
     activeItem.value = route;

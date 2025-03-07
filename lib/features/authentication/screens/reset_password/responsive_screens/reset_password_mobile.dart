@@ -3,7 +3,9 @@ import 'package:yt_ecommerce_admin_panel/features/authentication/screens/reset_p
 import 'package:yt_ecommerce_admin_panel/utils/constants/sizes.dart';
 
 class ResetPasswordMobile extends StatelessWidget {
-  const ResetPasswordMobile({super.key});
+  const ResetPasswordMobile({super.key, required this.email});
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class ResetPasswordMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
-          child: ResetpasswordWidget(),
+          child: ResetpasswordWidget(email: email,),
         ),
       ),
     );
